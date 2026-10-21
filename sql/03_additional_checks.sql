@@ -1,9 +1,4 @@
 -- 03. Дополнительные срезы и проверки правил воронки.
--- Выполнять после 02_sales_funnel.sql.
-USE retailrocket;
-
-SELECT @@session.time_zone AS session_time_zone,
-       @@system_time_zone AS system_time_zone;
 
 -- Полные недели первого просмотра: понедельник 04.05 - воскресенье 06.09.
 -- YEARWEEK(..., 3): ISO-неделя, начинается в понедельник.
@@ -53,9 +48,7 @@ FROM retailrocket.first_purchases
 ORDER BY window_days;
 
 -- Покупатели после просмотра независимо от наличия корзины.
--- JOIN может вернуть несколько товарных событий одного пользователя:
--- DISTINCT нужен, чтобы посчитать его один раз.
--- Контроль: 9627 покупателей, 1088 вне полной последовательности.
+-- JOIN может вернуть несколько товарных событий одного пользователя, DISTINCT нужен, чтобы посчитать его один раз.
 SELECT
     COUNT(DISTINCT p.visitorid) AS buyers_after_view_7d,
     COUNT(DISTINCT CASE
