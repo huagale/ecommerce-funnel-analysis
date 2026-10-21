@@ -1,13 +1,4 @@
 -- 01. Первичное исследование и очистка.
--- Предварительно импортировать events.csv в retailrocket.events.
--- Пустые transactionid должны быть NULL.
-USE retailrocket;
-
--- Зафиксировать настройки перед календарными расчётами.
-SELECT @@session.time_zone AS session_time_zone,
-       @@system_time_zone AS system_time_zone;
-
-SHOW COLUMNS FROM retailrocket.events;
 
 -- Контрольные значения: 2756101 / 1407580 / 235061 / 17672.
 SELECT
@@ -98,7 +89,6 @@ GROUP BY event_date
 ORDER BY event_date;
 
 -- Проверка заказов, события которых попали на разные календарные даты.
--- Наличие такого заказа само по себе не означает ошибку данных.
 SELECT
     transactionid,
     COUNT(DISTINCT DATE(FROM_UNIXTIME(`timestamp` / 1000))) AS days_count,
