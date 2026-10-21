@@ -1,13 +1,6 @@
 -- 02. Пользовательская воронка: просмотр < корзина < покупка.
 -- Общее окно: 7 суток от первого зарегистрированного просмотра.
--- Выполнять после 01_data_quality.sql.
-USE retailrocket;
-
-DROP TABLE IF EXISTS retailrocket.first_purchases;
-DROP TABLE IF EXISTS retailrocket.first_carts;
-DROP TABLE IF EXISTS retailrocket.funnel_users;
-DROP TABLE IF EXISTS retailrocket.first_views;
-
+-- создаем таблицу в которой будем работать
 CREATE TABLE retailrocket.first_views AS
 SELECT
     visitorid,
